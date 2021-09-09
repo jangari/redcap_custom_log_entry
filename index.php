@@ -39,7 +39,7 @@ $logging_note = "";
     <tbody>
         <tr>
             <td width='100px'>
-<label for="logging_note" style="font-weight: bold; color: #880000;">Log Entry:</label><p style="color: grey; font-style: italic; font-size: 80%;">500 char max</p></td> <td><textarea id="logging_note" name="logging_note" rows="3" cols="60" maxlength="500" style="resize: vertical;"><?php echo $logging_note;?></textarea></td>
+<label for="logging_note" style="font-weight: bold; color: #880000;">Note:</label><p style="color: grey; font-style: italic; font-size: 80%;">500 char max</p></td> <td><textarea id="logging_note" name="logging_note" rows="3" cols="60" maxlength="500" style="resize: vertical;"><?php echo $logging_note;?></textarea></td>
         </tr>
          <tr><td style="padding-bottom:10px">
              <label for="logging_record" style="font-weight: bold; color: #880000;">Record ID:</label>
@@ -52,7 +52,7 @@ foreach ($record_names as $record_name){
 };
 ?>
     </select></td><td style="font-size:11px;color:#666;padding-left:10px;" valign="top">
-    Select from drop-down if event is for existing Record ID
+    Select from drop-down if note is for existing Record ID
     </td></tr></tbody></table></td>
     </tr>
 <td></td>
