@@ -1,0 +1,41 @@
+{
+    "name": "Custom Log Entry",
+
+    "namespace": "INTERSECT\\customLogEntry", 
+
+    "description": "Allows users to add a custom entry to a project's log, optionally linked to a record.",
+
+    "documentation": "README.md",
+
+    "authors": [
+        {
+             "name": "Aidan Wilson",
+             "email": "aidan.wilson@intersect.org.au",
+             "institution": "Intersect Australia"
+         }
+     ],
+
+    "framework-version": 6,
+
+    "permissions": [
+        "redcap_every_page_top"
+    ],
+
+    "enable-every-page-hooks-on-system-pages": false,
+
+   "links": {
+      "project": [
+         {
+            "name": "Custom Log Entry",
+            "key": "custom-log-entry",
+            "icon": "fas fa-clipboard-list",
+            "url": "index.php",
+            "show-header-and-footer": true
+         }
+      ]
+   },
+
+    "compatibility": {
+        "redcap-version-min": "10.4.1"
+    }
+ }
