@@ -5,7 +5,7 @@
     <br><br>
 </div>
 <p>Use this form to log a custom log entry, which will appear in the logging for this project. This may be useful if you would like to log some custom note for auditing purposes. Examples include explaining why users were suspended, why records were deleted, or why the project was moved to analysis/cleanup mode. In short, automatic logging records <em>what</em> happened; custom log entries can be used to keep a record of <em>why</em> those things happened.</p>
-<p>These entries are logged against the current date and time, your username (<?php echo USERID ?>), and with the description "Custom Log Entry". You may also select a Record ID from the dropdown if the entry pertains to a record, or choose "Not applicable" if the entry pertains to the project as a whole. Entries linked to a Record ID will be filterable by that Record ID on the Logging page.</p>
+<p>These entries are logged against the current date and time, your username (<?php echo USERID ?>), and with the description "Note". You may also select a Record ID from the dropdown if the entry pertains to a record, or choose "Not applicable" if the entry pertains to the project as a whole. Entries linked to a Record ID will be filterable by that Record ID on the Logging page.</p>
 
 <?php
 // Get the project's Record ID field
@@ -26,7 +26,7 @@ $record_names = array_keys($data);
 /* var_dump($record_names); */
 
 if (isset($_POST['logging_note'])) {
-    REDCap::logEvent("Custom Log Entry", $_POST['logging_note'], $sql = NULL, $record = $_POST['logging_record'], $event = NULL);
+    REDCap::logEvent("Note", $_POST['logging_note'], $sql = NULL, $record = $_POST['logging_record'], $event = NULL);
 }
 // Define an empty var or two
 $logging_record = "";
