@@ -26,7 +26,7 @@ $record_names = array_keys($data);
 /* var_dump($record_names); */
 
 if (isset($_POST['logging_note'])) {
-    REDCap::logEvent("Custom Event", $_POST['logging_note'], $sql = NULL, $record = $_POST['logging_record'], $event = NULL);
+    REDCap::logEvent("Custom Log Entry", $_POST['logging_note'], $sql = NULL, $record = $_POST['logging_record'], $event = NULL);
 }
 // Define an empty var or two
 $logging_record = "";
