@@ -15,7 +15,7 @@
          }
      ],
 
-    "framework-version": 6,
+    "framework-version": 8,
 
     "permissions": [
         "redcap_every_page_top"
@@ -36,6 +36,6 @@
    },
 
     "compatibility": {
-        "redcap-version-min": "10.4.1"
+        "redcap-version-min": "12.3.1"
     }
  }

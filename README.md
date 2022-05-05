@@ -23,3 +23,4 @@ Upon submitting the custom entry, the user is redirected to the Logging page.
 Version | Description
 ------- | --------------------
 v1.0.0  | Initial release.
+v1.1.0  | Record select now supports custom record labels, and becomes a search box if number of records is 5000 or more.
