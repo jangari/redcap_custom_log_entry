@@ -32,7 +32,7 @@ $logging_note = "";
         <td style="padding-bottom:10px"><table><tbody><tr><td>
 <?php
 
-print Records::renderRecordListAutocompleteDropdown($project_id, true, 4, "logging_record", "x-form-text x-form-field", "font-size:11px;", "", " - not applicable - ", "","name='logging_record'");
+print Records::renderRecordListAutocompleteDropdown($project_id, true, 5000, "logging_record", "x-form-text x-form-field", "font-size:11px;", "", " - not applicable - ", "","name='logging_record'");
 
 ?>
 </td><td style="font-size:11px;color:#666;padding-left:10px;" valign="top">
