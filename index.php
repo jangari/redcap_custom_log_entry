@@ -8,14 +8,51 @@
 <p>These entries are logged against the current date and time, your username (<?php echo USERID ?>), and with the description "Note". You may also select a record from the dropdown if the entry is associated with a specific record, or choose "Not applicable" if the entry pertains to the project as a whole. Entries linked to a record will be filterable by that record on the Logging page.</p>
 
 <?php
+$allowNonLoggingUsers = $module->getProjectSetting('non-logging-user');
 
+// 1. Process Form Submission
+if (isset($_POST['logging_note']) && !empty($_POST['logging_note'])) {
+    
+    $submittedRecord = $_POST['logging_record'];
+    $note = $_POST['logging_note'];
+    
+    // Check if a record was actually selected (it's not empty and not the 'blank' placeholder)
+    $hasRecord = (!empty($submittedRecord) && $submittedRecord !== '[blank]');
 
-if (isset($_POST['logging_note'])) {
-    REDCap::logEvent("Note", $_POST['logging_note'], $sql = NULL, $record = $_POST['logging_record'], $event = NULL);
+    if ($hasRecord) {
+        $pid = $module->getProjectId(); 
+        $recordExists = \Records::recordExists($project_id, $submittedRecord);
+
+        if (!$recordExists) {
+            header("Location: " . $module->getUrl("index.php") . "&msg=error");
+            exit;
+        }
+    }
+
+    \REDCap::logEvent("Note", $note, null, ($hasRecord ? $submittedRecord : null));
+    header("Location: " . $module->getUrl("index.php") . "&msg=success");
+    exit;
 }
+
+// 2. Display Status Messages
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] == 'success') {
+        echo '<div id="status-message" class="darkgreen" style="margin:20px 0;padding:10px;">
+                <img src="' . APP_PATH_IMAGES . 'tick.png"> 
+                <b>Success:</b> The log entry was recorded successfully.
+              </div>';
+    } else if ($_GET['msg'] == 'error') {
+        echo '<div id="status-message" class="red" style="margin:20px 0;padding:10px;">
+                <img src="' . APP_PATH_IMAGES . 'exclamation.png"> 
+                <b>Error:</b> The record you entered does not exist in this project.
+              </div>';
+    }
+
+}
+
 // Define an empty var or two
-$logging_record = "";
-$logging_note = "";
+$logging_record = null;
+$logging_note = null;
 ?>
 <form method="post" action="">
 
@@ -40,16 +77,28 @@ print Records::renderRecordListAutocompleteDropdown($project_id, true, 5000, "lo
     </td></tr></tbody></table></td>
     </tr>
 <td></td>
-  <td><input type="submit" name="submit" value="Submit" style="font-weight: bold; color: #880000;"> and go to Logging</td>  
+<td><input type="submit" name="submit" value="Submit" style="font-weight: bold; color: #880000;"></td>  
     </tbody>
     </table>
 </form>
-<?php
-if (isset($_POST['logging_note'])) {
-    ?>
 <script type="text/javascript">
-    window.location = "<?php echo APP_PATH_WEBROOT ?>/Logging/index.php?pid=<?php echo $project_id ?>";
+    $(function() {
+        var statusMsg = $('#status-message');
+        
+        if (statusMsg.length) {
+            // 1. Remove "?msg=success" or "&msg=success" from the URL 
+            // without refreshing the page
+            if (window.history.replaceState) {
+                var url = window.location.href;
+                // Use regex to strip the msg param
+                var cleanUrl = url.replace(/[&?]msg=success/, "").replace(/[&?]msg=error/, "");
+                window.history.replaceState({}, document.title, cleanUrl);
+            }
+
+            // 2. Wait 3 seconds, then slide up to "disappear" the message
+            setTimeout(function() {
+                statusMsg.slideUp(500);
+            }, 3000);
+        }
+    });
 </script>
-    <?php
-};
-?>

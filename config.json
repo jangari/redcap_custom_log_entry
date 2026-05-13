@@ -1,41 +1,50 @@
 {
     "name": "Custom Log Entry",
 
-    "namespace": "INTERSECT\\customLogEntry", 
+        "namespace": "INTERSECT\\customLogEntry", 
 
-    "description": "Allows users to add a custom entry to a project's log, optionally linked to a record.",
+        "description": "Allows users to add a custom entry to a project's log, optionally linked to a record, as well as an API method to do the same.",
 
-    "documentation": "README.md",
+        "documentation": "README.md",
 
-    "authors": [
-        {
-             "name": "Aidan Wilson",
-             "email": "aidan.wilson@intersect.org.au",
-             "institution": "Intersect Australia"
-         }
-     ],
+        "authors": [
+            {
+                "name": "Aidan Wilson",
+                "email": "aidan.wilson@intersect.org.au",
+                "institution": "Intersect Australia"
+            }
+        ],
 
-    "framework-version": 8,
+        "framework-version": 16,
 
-    "permissions": [
-        "redcap_every_page_top"
-    ],
+        "enable-every-page-hooks-on-system-pages": false,
 
-    "enable-every-page-hooks-on-system-pages": false,
+        "links": {
+            "project": [
+                {
+                    "name": "Custom Log Entry",
+                    "key": "custom-log-entry",
+                    "icon": "fas fa-clipboard-list",
+                    "url": "index.php",
+                    "show-header-and-footer": true
+                }
+            ]
+        },
 
-   "links": {
-      "project": [
-         {
-            "name": "Custom Log Entry",
-            "key": "custom-log-entry",
-            "icon": "fas fa-clipboard-list",
-            "url": "index.php",
-            "show-header-and-footer": true
-         }
-      ]
-   },
+        "system-settings": [
+            {
+                "key": "non-logging-user",
+                "name": "Allow users without logging privileges to create custom log entries",
+                "type": "checkbox",
+                "allow-project-overrides": true
+            }
+        ],
 
-    "compatibility": {
-        "redcap-version-min": "12.3.1"
-    }
- }
+        "api-actions": {
+            "add": {
+                "description": "Adds a custom entry to the project log. Parameters: 'comment' (required), 'record' (optional).",
+                "access": ["auth"]
+            }
+        }
+
+}
