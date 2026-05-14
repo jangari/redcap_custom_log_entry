@@ -1,6 +1,6 @@
 # Custom Log Entry
 
-Allows users to add a custom entry to a project's log, optionally linked to a record, via a page or via the REDCap API.
+Allows users to add a custom entry to a project's log, optionally linked to a record, via a page or via the REDCap API, for project audit purposes.
 
 ## Purpose
 
@@ -14,7 +14,7 @@ Install the module from REDCap module repository and enable in the Control Cente
 
 ## Usage
 
-### Sidebar page
+### Project page
 
 The Custom Log Entry sidebar page allows users with appropriate permissions (see [Permissions](#permissions) below) to enter a note to be logged against their username. They may optionally select a record from the project to associate the log entry with. Doing so will mean that an entry will be filterable from the Logging page.
 

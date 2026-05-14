@@ -29,7 +29,7 @@ class customLogEntry extends \ExternalModules\AbstractExternalModule {
         $record = $payload['record'] ?? null;
         $recordExists = Records::recordExists($project_id, $record);
         if (!empty($record) && !$recordExists) {
-            return $this->framework->apiErrorResponse("Record '$record' does not exist", 400);
+            return $this->framework->apiErrorResponse("Record '$record' not found", 404);
         }
         if (empty($comment)) {
             return $this->framework->apiErrorResponse("The 'comment' parameter is required", 400);
@@ -40,7 +40,8 @@ class customLogEntry extends \ExternalModules\AbstractExternalModule {
 
     public function redcap_module_link_check_display($project_id, $link) {
         $allowNonLoggingUsers = $this->getProjectSetting('non-logging-user');
-        $rights = REDCap::getUserRights(USERID);
+        $user_id = USERID;
+        $rights = REDCap::getUserRights($user_id);
         $hasLoggingRights = ($rights[$user_id]['data_logging'] == '1');
         $isSuperUser = (defined('SUPER_USER') && SUPER_USER == 1);
 
